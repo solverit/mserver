@@ -9,7 +9,7 @@ import collection.mutable
 
 /**
  * Created by IntelliJ IDEA.
- * User: user
+ * User: Solverit
  * Date: 14.12.10
  * Time: 4:15
  */

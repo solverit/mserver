@@ -1,0 +1,29 @@
+package com.awar.ags.net.protocol;
+
+option java_package = "com.awar.ags.net.protocol";
+option java_outer_classname = "Protocol";
+
+message ProtocolMSG 
+{
+  // commands
+  optional LoginRequest  loginrequest	= 3;
+  optional LoginResponse loginresponse	= 4;
+
+}
+
+message LoginRequest 
+{
+  required string login  = 1;
+}
+
+message LoginResponse 
+{
+  required int32 idsess = 1;
+  required int32 idplay = 2;
+}
+
+message MoveRequest
+{
+  required int32 x   = 1; 
+  required int32 y   = 2; 
+}

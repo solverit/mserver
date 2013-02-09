@@ -6,7 +6,7 @@ import org.jboss.netty.handler.codec.replay.{VoidEnum, ReplayingDecoder}
 
 /**
  * Created by IntelliJ IDEA.
- * User: user
+ * User: Solverit
  * Date: 01.12.10
  * Time: 19:12
  */

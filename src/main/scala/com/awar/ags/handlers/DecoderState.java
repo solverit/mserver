@@ -2,7 +2,7 @@ package com.awar.ags.handlers;
 
 /**
  * Created by IntelliJ IDEA.
- * User: user
+ * User: Solverit
  * Date: 15.12.11
  * Time: 0:06
  */

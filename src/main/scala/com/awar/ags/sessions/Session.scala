@@ -4,10 +4,11 @@ import org.slf4j.{LoggerFactory, Logger}
 import java.util.concurrent.atomic.AtomicInteger
 import org.jboss.netty.channel.Channel
 import java.lang.String
+import beans.BeanProperty
 
 /**
  * Created by IntelliJ IDEA.
- * User: user
+ * User: Solverit
  * Date: 01.12.10
  * Time: 19:30
  */
@@ -21,20 +22,20 @@ class Session( ch: Channel )
   // ----- fields -----
   val idCounter: AtomicInteger = new AtomicInteger( 0 )
 
-  @scala.reflect.BeanProperty
+  @BeanProperty
   var id: Long = 0L
 
   var channel: Channel = null
 
 //  var handler: ActorRef =  new SessionHandler( this ).self
 
-  @scala.reflect.BeanProperty
+  @BeanProperty
   var clientIpAddress = NO_ADRESS
 
-  @scala.reflect.BeanProperty
+  @BeanProperty
   var clientPort = NO_ADRESS
 
-  @scala.reflect.BeanProperty
+  @BeanProperty
   var connected = false
 
 

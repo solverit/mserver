@@ -10,7 +10,7 @@ import com.awar.ags.handlers.{ConnectionHandler, MessageFramer, ChannelHandler}
 
 /**
  * Created by IntelliJ IDEA.
- * User: user
+ * User: Solverit
  * Date: 01.12.10
  * Time: 17:24
  */
@@ -28,7 +28,7 @@ object CoreServer
   {
     // Configure the thread.
     val bossExec:   ExecutorService = Executors.newFixedThreadPool( 2 )
-    val workerExec: ExecutorService = Executors.newCachedThreadPool()
+    val workerExec: ExecutorService = Executors.newFixedThreadPool( 2 )
     val workerCount = 4
 
     factory = new NioServerSocketChannelFactory( bossExec, workerExec, workerCount )

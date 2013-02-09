@@ -5,7 +5,7 @@ import org.slf4j.{LoggerFactory, Logger}
 
 /**
  * Created by IntelliJ IDEA.
- * User: user
+ * User: Solverit
  * Date: 14.12.10
  * Time: 4:52
  */
@@ -26,6 +26,6 @@ class ConnectionHandler extends SimpleChannelHandler
 
   override def exceptionCaught( ctx: ChannelHandlerContext, e: ExceptionEvent )
   {
-    log.error ( "Exp : {}", e.getCause )
+    log.error ( "Exp: {}", e.getCause )
   }
 }

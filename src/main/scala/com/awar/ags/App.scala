@@ -5,7 +5,7 @@ import org.slf4j.{LoggerFactory, Logger}
 
 /**
  * Created by IntelliJ IDEA.
- * User: user
+ * User: Solverit
  * Date: 01.12.10
  * Time: 17:24
  */
