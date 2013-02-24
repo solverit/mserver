@@ -1,4 +1,0 @@
-2013-02-24 02:39:52,758 [INFO ][main            ][               ags.core.CoreServer$] - Starting server
-2013-02-24 02:39:52,811 [INFO ][main            ][               ags.core.CoreServer$] - Start server: ok
-2013-02-24 02:40:05,546 [INFO ][O server boss #5][     ags.handlers.ConnectionHandler] - Channel Open
-2013-02-24 02:40:18,262 [INFO ][ew I/O worker #1][     ags.handlers.ConnectionHandler] - Channel Closed

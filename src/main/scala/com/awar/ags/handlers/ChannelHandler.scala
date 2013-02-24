@@ -3,7 +3,10 @@ package com.awar.ags.handlers
 import org.jboss.netty.buffer.ChannelBuffer
 import org.jboss.netty.channel._
 import org.slf4j.{LoggerFactory, Logger}
-import com.awar.ags.sessions.SessionManager
+import com.awar.ags.sessions.{Session, SessionManager}
+import com.awar.ags.game.GameServer
+import com.awar.ags.net.protocol.Protocol
+import com.awar.ags.net.protocol.Protocol.ProtocolMSG
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,15 +21,18 @@ class ChannelHandler extends SimpleChannelHandler
 
   override def messageReceived( ctx: ChannelHandlerContext, e: MessageEvent )
   {
+    // прочитаем сообщение
     val msg = e.getMessage.asInstanceOf[ ChannelBuffer ].array()
 
-    var session = SessionManager.getSessionByChannel( e.getChannel )
-    if ( session == null )
-    {
-      session = SessionManager.createSession( e.getChannel )
-    }
+    // проверим, есть ли сессия для данного соединения. если нет, создадим
+    val session: Session = SessionManager.getSessionByChannel( e.getChannel ).getOrElse(SessionManager.createSession( e.getChannel ))
 
-//    session.handler ! msg
+    log.info( "Session: {}", session.getId )
+
+    // десериализуем сообщение protobuff
+    val comm: ProtocolMSG = Protocol.ProtocolMSG.parseFrom( msg )
+
+    GameServer.MessageProcessor( session, comm )
   }
 
 }

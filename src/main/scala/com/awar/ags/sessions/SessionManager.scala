@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap
 import org.jboss.netty.channel.Channel
 import java.net.InetSocketAddress
 import collection.mutable
+import org.slf4j.{LoggerFactory, Logger}
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,12 +17,16 @@ import collection.mutable
 
 object SessionManager
 {
-  val sessionsByChannel: mutable.ConcurrentMap[ Channel, Session ] = new ConcurrentHashMap[ Channel, Session ]
+  val log: Logger = LoggerFactory.getLogger( getClass )
+
+  val sessionsByChannel: mutable.HashMap[ Channel, Session ] = new mutable.HashMap[ Channel, Session ]
 
   def createSession( ch: Channel ): Session =
   {
     val session = new Session( ch )
-//    val addr: InetSocketAddress = ch.getLocalAddress.asInstanceOf[ InetSocketAddress ]
+    val addr: InetSocketAddress = ch.getLocalAddress.asInstanceOf[ InetSocketAddress ]
+
+    log.info( "Create Session: {}, from: {}", session.getId, addr )
 
     session
   }
@@ -33,14 +38,9 @@ object SessionManager
   }
 
   // ----- session -----
-  def getSessionByChannel( ch: Channel ): Session =
+  def getSessionByChannel( ch: Channel ): Option[Session] =
   {
-    val sess = sessionsByChannel.get( ch )
-
-    if( sess == None )
-      null
-    else
-      sess.get
+    sessionsByChannel.get( ch )
   }
 
 }

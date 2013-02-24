@@ -5,6 +5,9 @@ import java.util.concurrent.atomic.AtomicInteger
 import org.jboss.netty.channel.Channel
 import java.lang.String
 import beans.BeanProperty
+import com.awar.ags.net.protocol.Protocol.ProtocolMSG
+import java.nio.ByteBuffer
+import org.jboss.netty.buffer.ChannelBuffers
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,11 +26,9 @@ class Session( ch: Channel )
   val idCounter: AtomicInteger = new AtomicInteger( 0 )
 
   @BeanProperty
-  var id: Long = 0L
+  var id: Int = 0
 
   var channel: Channel = null
-
-//  var handler: ActorRef =  new SessionHandler( this ).self
 
   @BeanProperty
   var clientIpAddress = NO_ADRESS
@@ -38,6 +39,7 @@ class Session( ch: Channel )
   @BeanProperty
   var connected = false
 
+  setConnection( ch )
 
   // ----- getters ans setters
   def getChannel = channel
@@ -68,6 +70,17 @@ class Session( ch: Channel )
         this.clientPort      = NO_ADRESS
       }
     }
+  }
+
+  // -- send ---
+  def sendMSG( message: ProtocolMSG.Builder )
+  {
+    val msg:Array[Byte] = message.build().toByteArray
+    val bb:ByteBuffer = ByteBuffer.allocate( 4 + msg.length )
+    bb.putInt( msg.length )
+    bb.put( msg )
+
+    channel.write( ChannelBuffers.wrappedBuffer( bb.array() ) )
   }
 
   // ----- destroy -----
